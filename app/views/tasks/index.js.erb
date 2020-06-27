@@ -1,0 +1,14 @@
+(function() {
+  var set_pos;
+
+  set_pos = function() {
+    $('.card-body').each(function(i) {
+      $(this).attr('data-pos', i + 1);
+    });
+  };
+
+}).call(this);
+
+$('#tasks').html('<%= escape_javascript render(@tasksToday) %>');
+$('#paginator').html('<%= escape_javascript(paginate(@tasksToday, remote: true).to_s) %>');
+

@@ -1,0 +1,26 @@
+<%= simple_form_for @task,  wrapper: :inline_form do |f| %>
+	<% if @task.errors.any? %>
+      	<% @task.errors.full_messages.each do |message| %>
+			<%= alert message %>
+		<% end %>
+	<% end %>
+
+<form class= "form" role= "form">
+	 
+	<div class="form-group row">
+		<%= f.text_area :comment, required: true, class: "form-control", id:"commentField", placeholder:"Komment", rows: 1 %>
+	</div>
+	
+	<div class="form-group row">			
+		<%= f.text_field :date , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField"%>
+		<%= f.text_field :start_time , data: {behavior: "timepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"startTimeField", placeholder:"Start"%>
+		<%= f.text_field :end_time , data: {behavior: "timepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"endTimeField", placeholder:"Finish"  %>
+	</div> 
+
+	<div class="form-group">
+	<%= f.submit "Save" , class: 'btn btn-primary' %>
+	<button type="button" class="btn btn-danger"><%= link_to "Kancel",tasks_path  , data: { confirm: 'Emin Misiniz?' } %></button>
+	</div>
+</form>
+
+<% end %>
