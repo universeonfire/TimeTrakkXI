@@ -1,16 +1,19 @@
 <h1> reports </h1>
 
 
-<%= simple_form_for :task_report,  wrapper: :inline_form , path: :task_report_path do |f| %>
+<%= simple_form_for :task_report,  wrapper: :inline_form , remote: true do |f| %>
     <form class= "form" role= "form">
         <%= f.select :selected_user, User.all.collect { |user| [user.first_name, user.id] },required: true, class: "form-control mb-2 mr-sm-2", id:"userSelect" %>
         <%= f.text_field :date1, as: :string , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField1"%>
         <%= f.text_field :date2, as: :string , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField2"%>
-        <%= f.submit "Save" , class: 'btn btn-primary' , remote: true %>
+        <%= f.submit "Fetch" , class: 'btn btn-primary'  %>
     </form>
 <% end %>    
-<div id="taskList">
-    <% @tasksBetween.each do |task| %>
-        <%= task.comment %>
-    <%end%>
+<div class="album py-5 bg-light">
+<div class="container">
+    <div id="tasks" class="row sort">
+        <%= render @tasksBetween %>
+    </div>
 </div>
+</div> 
+ 
