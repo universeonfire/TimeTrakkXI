@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_142854) do
+ActiveRecord::Schema.define(version: 2020_06_29_194919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(version: 2020_06_18_142854) do
 
   create_table "tasks", force: :cascade do |t|
     t.text "comment"
-    t.date "date"
-    t.string "start_time"
-    t.string "end_time"
+    t.string "task_type"
+    t.date "start_time"
+    t.string "time_to_start"
+    t.string "time_to_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -42,6 +43,8 @@ ActiveRecord::Schema.define(version: 2020_06_18_142854) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin_role"
+    t.boolean "user_role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

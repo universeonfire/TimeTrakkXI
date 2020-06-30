@@ -1,19 +1,24 @@
-<h1> reports </h1>
-
-
-<%= simple_form_for :task_report,  wrapper: :inline_form , remote: true do |f| %>
-    <form class= "form" role= "form">
-        <%= f.select :selected_user, User.all.collect { |user| [user.first_name, user.id] },required: true, class: "form-control mb-2 mr-sm-2", id:"userSelect" %>
-        <%= f.text_field :date1, as: :string , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField1"%>
-        <%= f.text_field :date2, as: :string , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField2"%>
-        <%= f.submit "Fetch" , class: 'btn btn-primary'  %>
-    </form>
-<% end %>    
-<div class="album py-5 bg-light">
-<div class="container">
-    <div id="tasks" class="row sort">
-        <%= render @tasksBetween %>
+<div class="container-fluid">
+    <%= simple_form_for :task_report,  wrapper: :inline_form , remote: true do |f| %>
+        <form class= "form" role= "form">
+        <%if current_user.admin_role? %>
+            <%= f.select :selected_user, User.all.collect { |user| [user.first_name, user.id] },required: true, class: "form-control mb-2 mr-sm-2", id:"userSelect" %>
+        <%else%>
+            <%= f.select :selected_user, [[current_user.first_name, current_user.id]], required: true, class: "form-control mb-2 mr-sm-2", id:"userSelect" %>
+        <%end%>    
+            <%= f.text_field :date1, as: :string , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField1"%>
+            <%= f.text_field :date2, as: :string , data: {behavior: "datepickr"}, required: true, class: "form-control mb-2 mr-sm-2", id:"dateField2"%>
+            <%= f.submit "Fetch" , class: 'btn btn-primary'  %>
+        </form>
+    <% end %>    
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div id="tasks" class="row sort">
+                <%= render @tasksBetween %>
+            </div>
+        </div>
+    </div> 
+    <div id = "pagination">
+        <%= paginate @tasksBetween, remote: true %>
     </div>
-</div>
-</div> 
- 
+ </div>   

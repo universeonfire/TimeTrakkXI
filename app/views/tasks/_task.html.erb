@@ -1,6 +1,6 @@
 <div class="col-md-4">
   <div class="card mb-4 shadow-sm">
-  <h5 class="card-header"><%= task.date%></h5>
+  <h5 class="card-header"><%= task.start_time.strftime("%d-%B-%Y")%></h5>
         <div class="card-body" data-id = "<%=task.id%>">
           <p class="card-text"><%= task.comment %></p>
           <div class="d-flex justify-content-between align-items-center">
@@ -10,6 +10,6 @@
           </div>
           </div>
         </div>
-        <div class="card-footer"> Start: <%= task.start_time  %> Finish: <%= task.end_time  %></div>
+        <div class="card-footer"> Start: <%= task.time_to_start  %> Finish: <%= task.time_to_end  %></div>
   </div>
 </div>

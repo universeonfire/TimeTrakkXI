@@ -13,17 +13,7 @@
             </div>
         </div>
     </div>    
-  
-
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div id="tasks" class="row sort">
-                <%= render @tasksToday %>
-            </div>
-        </div>
-    </div> 
-    <div id = "paginator">
-        <%= paginate @tasksToday, remote: true %>
+    <div id="calendar">
+        <%= render partial: 'components/monthlyCalendar', locals: { collection: @tasksByUser } %>
     </div>
-
 </div>

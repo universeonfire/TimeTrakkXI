@@ -9,6 +9,5 @@
 
 }).call(this);
 
-$('#tasks').html('<%= escape_javascript render(@tasksToday) %>');
-$('#paginator').html('<%= escape_javascript(paginate(@tasksToday, remote: true).to_s) %>');
+
 

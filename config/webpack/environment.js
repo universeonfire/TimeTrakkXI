@@ -8,7 +8,9 @@ environment.plugins.append('Provide',
         jquery: 'jquery',
         'window.jQuery': 'jquery',
         Popper: ['popper.js', 'default'],
-        moment: 'moment/moment'
+        moment: 'moment/moment',
+        
+        
     })
 )
 

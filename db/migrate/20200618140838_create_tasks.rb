@@ -2,9 +2,10 @@ class CreateTasks < ActiveRecord::Migration[6.0]
   def change
     create_table :tasks do |t|
       t.text :comment
-      t.date :date
-      t.string :start_time
-      t.string :end_time
+      t.string :task_type
+      t.date :start_time
+      t.string :time_to_start
+      t.string :time_to_end
 
       t.timestamps
     end

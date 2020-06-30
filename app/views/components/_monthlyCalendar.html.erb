@@ -1,0 +1,8 @@
+<%= month_calendar events: collection do |date,task| %>
+    <%= date %>
+    <% task.each do |t| %>
+        <div>
+          <%= t.comment %>
+        </div>
+    <% end %>
+<% end %>

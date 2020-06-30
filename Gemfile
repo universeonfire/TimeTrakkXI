@@ -46,9 +46,12 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
-gem 'date_validator', '~> 0.10.0'
 gem 'simple_form'
 gem 'devise-i18n'
+gem 'simple_calendar', '~> 2.4', '>= 2.4.1'
+gem 'cancancan', '~> 3.1'
+gem 'rails_admin', '~> 2.0', '>= 2.0.2'
+
  
 
 

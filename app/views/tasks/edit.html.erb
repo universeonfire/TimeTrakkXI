@@ -1,12 +1,6 @@
 <h1> Düzenle </h1>
 <%= simple_form_for @task,  wrapper: :inline_form do |f| %>
-	<% if @task.errors.any? %>
-      	<% @task.errors.full_messages.each do |message| %>
-			<%= alert message %>
-		<% end %>
-	<% end %>
-
-    <form class= "form" role= "form">
+	<form class= "form" role= "form">
         
         <div class="form-group row">
             <%= f.text_area :comment, required: true, class: "form-control", id:"commentField", placeholder:"Comment", rows: 4 %>
@@ -14,7 +8,7 @@
         
         <div class="form-group">
             <%= f.submit "Save" , class: 'btn btn-primary' %>
-            <button type="button" class="btn btn-danger"><%= link_to "Cancel",tasks_path  , data: { confirm: 'Are you sure?' } %></button>
+            <button type="button" class="btn btn-danger"><%= link_to "Cancel",task_report_path  , data: { confirm: 'Are you sure?' } %></button>
         </div>
     </form>
 <% end %>

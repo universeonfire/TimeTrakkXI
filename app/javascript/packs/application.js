@@ -7,6 +7,7 @@ require("moment")
 import flatpickr from "flatpickr";
 require("flatpickr/dist/flatpickr.css")
 
+ 
 
 document.addEventListener("turbolinks:load", () => {
     flatpickr("[data-behavior='datepickr']",{
@@ -23,5 +24,8 @@ document.addEventListener("turbolinks:load", () => {
         noCalendar: true,
         dateFormat: "H:i"
     })
+     
 })
 
+ 
+ 

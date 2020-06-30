@@ -1,15 +1,18 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:edit,:destroy]
     def index
-        @tasksToday = Task.todays_tasks.users_tasks(current_user).page(params[:page]).per(9)
+        @tasks = Task.all
+        @tasksByUser = @tasks.users_tasks(current_user.id)
         new()
     end
     def report
+       
         @tasks = Task.all
-        
         @date1, @date2 = Task.check_values(task_report_params[:date1],task_report_params[:date2])
+
+        puts(task_report_params[:selected_user])
         @tasksByUser = @tasks.users_tasks(task_report_params[:selected_user])
-        @tasksBetween = @tasks.tasks_between_dates(@date1, @date2).users_tasks(task_report_params[:selected_user])
+        @tasksBetween = @tasks.tasks_by_time.tasks_between_dates(@date1, @date2).users_tasks(task_report_params[:selected_user]).page(params[:page]).per(20)
         respond_to do |format|
             format.html
             format.js
@@ -27,7 +30,7 @@ class TasksController < ApplicationController
         @task = Task.new(task_params)
         @task.user_id = current_user.id
         if @task.save
-            redirect_to tasks_path , notice:"Kayıt Oluşturuldu!"
+            redirect_to tasks_path , notice:"Saved!"
         else
             render :new
         end
@@ -36,14 +39,14 @@ class TasksController < ApplicationController
         @task = set_task
         
         if @task.update(task_params)
-            redirect_to tasks_path, notice: 'Kayıt Güncellendi!.'
+            redirect_to tasks_path, notice: 'Updated!'
         else
             render :edit
         end
     end    
     def destroy
         if @task.destroy
-            redirect_to tasks_path , notice:"Kayıt Silindi!"
+            redirect_to tasks_path , notice:"Destroyed!"
         end
     end
     private
@@ -51,7 +54,7 @@ class TasksController < ApplicationController
             @task = Task.find(params[:id])
         end
         def task_params
-            params.require(:task).permit(:comment,:date,:start_time,:end_time)
+            params.require(:task).permit(:comment,:task_type,:start_time,:time_to_start,:time_to_end)
         end
         def task_report_params
             params.fetch(:task_report, {}).permit(:date1, :date2, :selected_user)
