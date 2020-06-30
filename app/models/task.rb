@@ -4,7 +4,7 @@ class Task < ApplicationRecord
     validates_presence_of :comment, :start_time, :time_to_start, :time_to_end
     validate :time_check
 
-    scope :tasks_by_time, -> {order(time_to_start: :asc)}
+    scope :tasks_by_time, -> {order(start_time: :asc,time_to_start: :asc)}
     scope :users_tasks, -> (user) { where(:user => user)}
     scope :todays_tasks, -> { where(:start_time => Date.today)}
     scope :tasks_between_dates, -> (date1, date2) { where( "start_time >= ? AND start_time <= ?", date1, date2 )}
