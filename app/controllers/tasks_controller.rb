@@ -6,18 +6,14 @@ class TasksController < ApplicationController
         new()
     end
     def report
-       
         @tasks = Task.all
         @date1, @date2 = Task.check_values(task_report_params[:date1],task_report_params[:date2])
-
-        puts(task_report_params[:selected_user])
         @tasksByUser = @tasks.users_tasks(task_report_params[:selected_user])
         @tasksBetween = @tasks.tasks_by_time.tasks_between_dates(@date1, @date2).users_tasks(task_report_params[:selected_user]).page(params[:page]).per(20)
         respond_to do |format|
             format.html
             format.js
         end
-          
     end
     def new
         @task = Task.new
